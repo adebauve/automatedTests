@@ -62,7 +62,7 @@ print(tc.title + " START :\n================================================")
 expected_result = expected_listTasks(True)
 tc.addStep('listTasks',expected=expected_result)
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 tc = TestCase("Authenticate - valid credentials", "OK")
@@ -73,7 +73,7 @@ tc.addStep('setCredentials',args=[mainUser,password])
 expected_result = expected_authenticate(mainUser)
 tc.addStep('authenticate',expected=expected_result)
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 tc = TestCase("Authenticate - invalid credentials", "NOK")
@@ -83,7 +83,7 @@ tc.addStep('setCredentials', args=[otherUser,otherPwd])
 expected_result = expected_authenticate(otherUser,False)
 tc.addStep('authenticate',expected=expected_result)
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 tc = TestCase("Create new user", "OK")
@@ -99,7 +99,7 @@ tc.addStep('setCredentials',args=[otherUser,otherPwd])
 expected_result = expected_authenticate(otherUser)
 tc.addStep('authenticate',expected=expected_result)
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 tc = TestCase("Create new task without tags while authentified", "OK")
@@ -118,7 +118,7 @@ tc.addStep('listTasks', expected=expected_result)
 # check unexistence by retrieving existing tasks, parsing the response to get the list of task names, etc...
 # after the creation, check existence of created task in the response of the list tasks
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 tc = TestCase("Create new task with unexisting tags while authentified", "OK")
@@ -137,7 +137,7 @@ tc.addStep('listTasks',expected=expected_result)
 # check unexistence by retrieving existing tasks, parsing the response to get the list of task names, etc...
 # after the creation, check existence of created task in the response of the list tasks
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 tc = TestCase("Create new task with existing tags while authentified with another user", "OK")
@@ -156,7 +156,7 @@ tc.addStep('listTasks',expected=expected_result)
 # check unexistence by retrieving existing tasks, parsing the response to get the list of task names, etc...
 # after the creation, check existence of created task in the response of the list tasks
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 tc = TestCase("Create new task with already existing title", "NOK")
@@ -170,7 +170,7 @@ tc.addStep('createTask',args=[taskName,tags],expected=expected_result)
 expected_result = expected_listTasks()
 tc.addStep('listTasks',expected=expected_result)
 test_result = tc.executeTest()
-print(tc.title + " END :\n================================================")
+print(tc.title + " END \n================================================")
 printResults(tc.results)
 
 #response = tr.getTaskInfo(14)
