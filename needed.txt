@@ -1,0 +1,6 @@
+python
+pip ( should be installed with python)
+package "requests" (pip install requests)
+package "jsonpath" (pip install jsonpath)
+
+
