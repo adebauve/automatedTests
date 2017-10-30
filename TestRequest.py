@@ -3,6 +3,7 @@
 import sys
 import json
 import requests
+import time
 from requests import Request, Session
 from requests.auth import HTTPBasicAuth
 # sys.path.append('path-to-ptyhon')
@@ -20,6 +21,7 @@ class TestRequest:
    username=''
    password=''
    authentication = None
+   timestamp = 0
       
    # def setCookie(self,c):
       # self.cookie = c
@@ -44,6 +46,7 @@ class TestRequest:
       self.response_time = resp.elapsed
       
    def callAndLog(self,pr):
+      self.timestamp = time.time()
       resp = self.session.send(pr)
          
       self.logRequest(pr)
