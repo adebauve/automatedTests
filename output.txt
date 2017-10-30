@@ -1,0 +1,353 @@
+listTasks - no authentication
+listTasks
+0
+Request GET http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
+request body:
+None
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
+[]
+
+0:00:00.011744
+Authenticate - valid credentials
+setCredentials
+authenticate
+0
+
+Response:
+0
+
+
+0
+1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/json'}
+request body:
+{"username": "QA", "password": "willWin"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTE4NDI3MSwiaWF0IjoxNTA5MTgzNjcxfQ.eyJpZCI6MX0.po0AovZqUj29mYI5nkVaKAi7qSdVOsAJFBNfmm-59qQ", 
+    "username": "QA"
+}
+
+0:00:00.018003
+Authenticate - invalid credentials
+setCredentials
+authenticate
+0
+
+Response:
+0
+
+
+0
+1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/json'}
+request body:
+{"username": "kaput", "password": "boom"}
+Response:
+401
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '40', 'Connection': 'keep-alive'}
+{
+    "message": "Bad authentication"
+}
+
+0:00:00.012386
+Create new user
+createUser
+0
+Request POST http://debauve.qatest.dataiku.com:80/users
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '40', 'Content-Type': 'application/json'}
+request body:
+{"username": "toto", "password": "toto"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'keep-alive'}
+{
+    "username": "toto"
+}
+
+0:00:00.014655
+Create new task without tags while authentified
+setCredentials
+authenticate
+createTask
+listTasks
+0
+
+Response:
+0
+
+
+0
+1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/json'}
+request body:
+{"username": "QA", "password": "willWin"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTE4NDI3MSwiaWF0IjoxNTA5MTgzNjcxfQ.eyJpZCI6MX0.po0AovZqUj29mYI5nkVaKAi7qSdVOsAJFBNfmm-59qQ", 
+    "username": "QA"
+}
+
+0:00:00.012288
+2
+Request PUT http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '30', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+request body:
+{"title": "test1", "tags": []}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '143', 'Connection': 'keep-alive'}
+{
+    "date": "2017-10-28T11:41:11.802903Z", 
+    "done": false, 
+    "id": 1, 
+    "tags": [], 
+    "title": "test1", 
+    "username": "QA"
+}
+
+0:00:00.018923
+3
+Request GET http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
+request body:
+None
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '179', 'Connection': 'keep-alive'}
+[
+    {
+        "date": "2017-10-28T11:41:11.802903Z", 
+        "done": false, 
+        "id": 1, 
+        "tags": [], 
+        "title": "test1", 
+        "username": "QA"
+    }
+]
+
+0:00:00.015126
+Create new task with unexisting tags while authentified
+setCredentials
+authenticate
+createTask
+listTasks
+0
+
+Response:
+0
+
+
+0
+1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/json'}
+request body:
+{"username": "QA", "password": "willWin"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTE4NDI3MSwiaWF0IjoxNTA5MTgzNjcxfQ.eyJpZCI6MX0.po0AovZqUj29mYI5nkVaKAi7qSdVOsAJFBNfmm-59qQ", 
+    "username": "QA"
+}
+
+0:00:00.013193
+2
+Request PUT http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '44', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+request body:
+{"title": "test2", "tags": ["tag1", "tag2"]}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '348', 'Connection': 'keep-alive'}
+{
+    "date": "2017-10-28T11:41:11.854145Z", 
+    "done": false, 
+    "id": 2, 
+    "tags": [
+        {
+            "name": "tag1", 
+            "url": "http://localhost:5000/tags/1"
+        }, 
+        {
+            "name": "tag2", 
+            "url": "http://localhost:5000/tags/2"
+        }
+    ], 
+    "title": "test2", 
+    "username": "QA"
+}
+
+0:00:00.022944
+3
+Request GET http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
+request body:
+None
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '597', 'Connection': 'keep-alive'}
+[
+    {
+        "date": "2017-10-28T11:41:11.802903Z", 
+        "done": false, 
+        "id": 1, 
+        "tags": [], 
+        "title": "test1", 
+        "username": "QA"
+    }, 
+    {
+        "date": "2017-10-28T11:41:11.854145Z", 
+        "done": false, 
+        "id": 2, 
+        "tags": [
+            {
+                "name": "tag2", 
+                "url": "http://localhost:5000/tags/2"
+            }, 
+            {
+                "name": "tag1", 
+                "url": "http://localhost:5000/tags/1"
+            }
+        ], 
+        "title": "test2", 
+        "username": "QA"
+    }
+]
+
+0:00:00.013732
+Create new task with existing tags while authentified with another user
+setCredentials
+authenticate
+createTask
+listTasks
+0
+
+Response:
+0
+
+
+0
+1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '40', 'Content-Type': 'application/json'}
+request body:
+{"username": "toto", "password": "toto"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '188', 'Connection': 'keep-alive'}
+{
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTE4NDI3MSwiaWF0IjoxNTA5MTgzNjcxfQ.eyJpZCI6Mn0.d9PU8gI_SH9OlB3dw3gMLNko_nZZXKpd-Y7fmQDErkg", 
+    "username": "toto"
+}
+
+0:00:00.017786
+2
+Request PUT http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '44', 'Authorization': 'Basic dG90bzp0b3Rv', 'Content-Type': 'application/json'}
+request body:
+{"title": "test4", "tags": ["tag1", "tag3"]}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '350', 'Connection': 'keep-alive'}
+{
+    "date": "2017-10-28T11:41:11.905542Z", 
+    "done": false, 
+    "id": 3, 
+    "tags": [
+        {
+            "name": "tag3", 
+            "url": "http://localhost:5000/tags/3"
+        }, 
+        {
+            "name": "tag1", 
+            "url": "http://localhost:5000/tags/1"
+        }
+    ], 
+    "title": "test4", 
+    "username": "toto"
+}
+
+0:00:00.015162
+3
+Request GET http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
+request body:
+None
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Sat, 28 Oct 2017 09:41:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '1017', 'Connection': 'keep-alive'}
+[
+    {
+        "date": "2017-10-28T11:41:11.802903Z", 
+        "done": false, 
+        "id": 1, 
+        "tags": [], 
+        "title": "test1", 
+        "username": "QA"
+    }, 
+    {
+        "date": "2017-10-28T11:41:11.854145Z", 
+        "done": false, 
+        "id": 2, 
+        "tags": [
+            {
+                "name": "tag1", 
+                "url": "http://localhost:5000/tags/1"
+            }, 
+            {
+                "name": "tag2", 
+                "url": "http://localhost:5000/tags/2"
+            }
+        ], 
+        "title": "test2", 
+        "username": "QA"
+    }, 
+    {
+        "date": "2017-10-28T11:41:11.905542Z", 
+        "done": false, 
+        "id": 3, 
+        "tags": [
+            {
+                "name": "tag1", 
+                "url": "http://localhost:5000/tags/1"
+            }, 
+            {
+                "name": "tag3", 
+                "url": "http://localhost:5000/tags/3"
+            }
+        ], 
+        "title": "test4", 
+        "username": "toto"
+    }
+]
+
+0:00:00.013835
