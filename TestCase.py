@@ -69,11 +69,33 @@ class TestCase:
       # each item of the dictionnary is built as a list like this:
       #[value to check in the response, value to compare, method to use to check the value]
       testResultString = ''
-      if expected['status'] > 0:
+      if type(expected['status']) is not list:
+         if expected['status'] > 0:
+            exp_status = expected['status']
+            resp_status = self.request.response_status
+            if exp_status == resp_status:
+               testResultString = testResultString + 'HTML Status code OK\n'
+            elif (exp_status >= 400 | exp_status < 500) & (resp_status == 500):
+               testResultString = testResultString + 'HTML Status code NOK: ' + str(resp_status) + ' shows inappropriate error managment \n'
+            else:
+               self.results[stepIndex]['testResult'] = testResultString + "status code NOK: got " + str(resp_status) + " instead of expected " + str(exp_status)
+               return False
+      else:
          exp_status = expected['status']
          resp_status = self.request.response_status
-         if exp_status == resp_status:
+         if resp_status in exp_status :
             testResultString = testResultString + 'HTML Status code OK\n'
+         elif resp_status == 500:
+            for exp in exp_status:
+               if (exp >= 400) | (exp < 500):
+                  testResultString = testResultString + 'HTML Status code NOK: ' + str(resp_status) + ' shows inappropriate error managment \n'
+                  break
+               elif exp == resp_status:
+                  testResultString = testResultString + 'HTML Status code OK\n'
+                  break
+               else:
+                  self.results[stepIndex]['testResult'] = testResultString + "status code NOK: got " + str(resp_status) + " instead of expected " + str(exp_status)
+                  return False
          else:
             self.results[stepIndex]['testResult'] = testResultString + "status code NOK: got " + str(resp_status) + " instead of expected " + str(exp_status)
             return False
@@ -85,46 +107,90 @@ class TestCase:
             method = c[2]
             # todo: create special check for list of tasks
             response = json.loads(self.results[stepIndex]['responseBody'])
-            if not jsonpath.jsonpath(response,path) :
-               self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: not existing\n'
-               return False
+            if not jsonpath.jsonpath(response,path):
+               if (type(expected_value) is list) & (len(expected_value) == 0):
+                  pass
+               else:
+                  self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: not existing\n'
+                  return False
             else:
-               actual_value = jsonpath.jsonpath(response,path)[0]
-            
+               actual_value = jsonpath.jsonpath(response,path)
+               testResultString = testResultString + path + ' exists \n'
+
             if method == "equal":
-               if actual_value == expected_value:
+               if actual_value[0] == expected_value:
                   testResultString = testResultString + path + ' OK \n'
                else:
-                  self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
+                  self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value[0]) + '\n'
                   return False
             elif method == "listEqual":
-               actual_value = jsonpath.jsonpath(response,path).sort()
-               expected_value = expected_value.sort()
-               if actual_value == expected_value:
+               if len(expected_value) == 0:
                   testResultString = testResultString + path + ' OK \n'
+               elif len(expected_value) != len(actual_value):
+                  self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
+                  return False
+               else:
+                  actual_value = actual_value.sort()
+                  expected_value = expected_value.sort()
+                  if actual_value == expected_value:
+                     testResultString = testResultString + path + ' OK \n'
+                  else:
+                     self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
+                     return False
+            elif method == "dictListEqual":
+               actual_value = sorted(actual_value, key=lambda task: task['id'])
+               expected_value = sorted(expected_value, key=lambda task: task['id'])
+               if len(actual_value) == len(expected_value):
+                  i=0
+                  same=True
+                  for a in actual_value:
+                     if a != expected_value[i]:
+                        same=False
+                        break
+                     i+=1
+                  if same:
+                     testResultString = testResultString + path + ' OK \n'
+                  else:
+                     self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
+                     return False
                else:
                   self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
                   return False
             elif method == "checkToken":
-               print("check token " + actual_value)
-               if self.checkToken(actual_value):
+               # print("check token " + actual_value[0])
+               if self.checkToken(actual_value[0]):
                   testResultString = testResultString + path + ' OK \n'
                else:
-                  self.results[stepIndex]['testResult'] = testResultString + 'Token NOK: ' + actual_value + '\n'
+                  self.results[stepIndex]['testResult'] = testResultString + 'Token NOK: ' + actual_value[0] + '\n'
                   return False
             elif method == "equalZuluTime":
-               print('check date')
-               actual_time = time.strptime(actual_value[:19], "%Y-%m-%dT%H:%M:%S")
+               # print('check date')
+               actual_time = time.strptime(actual_value[0][:19], "%Y-%m-%dT%H:%M:%S")
                expected_time = time.gmtime(self.request.timestamp)
                if (actual_time == expected_time):
                   testResultString = testResultString + path + ' OK \n'
                else:
-                  # self.results[stepIndex]['testResult'] = testResultString + path + ' NOK: ' + actual_value + '\n'
+                  # self.results[stepIndex]['testResult'] = testResultString + path + ' NOK: ' + actual_value[0] + '\n'
                   # return False
-                  testResultString = testResultString + path + ' NOK: ' + actual_value + '\n'
+                  testResultString = testResultString + path + ' NOK: ' + actual_value[0] + '\n'
             elif method == "exists":
                # no need to do something, it is already checked before
                pass
+            elif method == "checkInList":
+               # for tags: both actual and expected are list
+               if type(expected_value) is list:
+                  if expected_value.sort() == actual_value.sort():
+                     testResultString = testResultString + path + ' OK \n'
+                  else:
+                     self.results[stepIndex]['testResult'] = testResultString + path + ' NOK: ' + str(actual_value) + '\n'
+                     return False
+               else:
+               # for tasks: actual = list of tasks while expected = taskname in a string
+                  if expected_value in actual_value:
+                     testResultString = testResultString + path + ' OK \n'
+                  else:
+                     self.results[stepIndex]['testResult'] = testResultString + path + ' NOK: ' + str(actual_value) + '\n'
+                     return False
             else:
                raise NameError("TEST ERROR: Verification method " + method + " is not implemented")
                
@@ -165,6 +231,7 @@ class TestCase:
       else:
          token_ok = True
       return token_ok
+
       
       
 

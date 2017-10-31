@@ -114,7 +114,7 @@ class TestRequest:
          bodydata['title'] = title
       if len(tags) > 0 :
          bodydata['tags'] = tags
-      if len(done) > 0 :
+      if type(done) is not str :
          bodydata['done'] = done
       
       prep_req = self.session.prepare_request(req)
