@@ -60,7 +60,7 @@ class TestCase:
       expected = self.steps[stepIndex]['expected']
       if len(expected) == 0:
          # nothing to check here
-         self.results[stepIndex] = {"step":stepIndex, "request": self.steps[stepIndex]['method'], "responseStatus": 0}
+         self.results[stepIndex] = {"step":stepIndex, "request": self.steps[stepIndex]['method'], "responseStatus": 0, "testResult": "OK"}
          return True
       # expected is a dictionary of elements:
       ## status = int: http status code

@@ -6,22 +6,51 @@ from expected_result import *
 import process_results
 from process_results import *
 
+def getCSVdata(filename):
+   out = []
+   f = open(filename,'r')
+   for line in f:
+      out.append(split(line,';'))
+   f.close()
+   
+   return out
 
+def array2csv(input, filename):
+   f = open(filename,'w')
+   for listline in input:
+      line = ''
+      for item in listline:
+         line = line + str(item) + ';'
+      line  = line + '\n'
+      f.write(line)
+   f.close
+      
+   
+fromFile = False
+# users = getCSVdata('./users.csv')
+users = []
 mainUser = "QA"
 password = "willWin"
 userSamePwd = "copycat"
 otherUser = "toto"
 otherPassword = "totoro"
-
 maxResponseTime = 1.0
+
 taskList=[]
-# taskList = json.loads(tc.request.response_body)
+tagDict = {}
+
+results = csvHeader()
+
 getTaskList = lambda tcase: json.loads(tcase.request.response_body)
-# taskList = getTaskList(tc)
+# usage: taskList = getTaskList(tc)
 
+getTagDict = lambda tcase: json.loads(tcase.request.response_body)
+# usage: tagDict = getTagDict(tc)
 
-TestRequest().dropTheBase()
+if not fromFile:
+   TestRequest().dropTheBase()
 
+testNumber = 1
 tc = TestCase("listTasks - empty list - no authentication", "OK")
 print(tc.title + " START :\n================================================")
 expected_result = expected_listTasks(taskList)
@@ -30,6 +59,8 @@ test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
 taskList = getTaskList(tc)
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Authenticate - valid credentials", "OK")
 print(tc.title + " START :\n================================================")
@@ -40,6 +71,11 @@ tc.addStep('authenticate',expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+if not fromFile:
+   if test_result:
+      users.append([mainUser,password])
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Authenticate - invalid credentials", "NOK")
 print(tc.title + " START :\n================================================")
@@ -49,6 +85,8 @@ tc.addStep('authenticate',expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Create new user with existing password", "OK")
 print(tc.title + " START :\n================================================")
@@ -64,9 +102,16 @@ tc.addStep('authenticate',expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+if not fromFile:
+   if test_result:
+      users.append([mainUser,password])
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Create new user with new password", "OK")
 print(tc.title + " START :\n================================================")
+otherUser = otherUser + 'bis'
+otherPassword = otherPassword + 'bis'
 expected_result = init_expected_result()
 expected_result['status'] = 200
 expected_result['content'] = [["$.username",otherUser,"equal"]]
@@ -79,7 +124,11 @@ tc.addStep('authenticate',expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
-
+if not fromFile:
+   if test_result:
+      users.append([mainUser,password])
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Create new task without tags while not authentified", "NOK")
 taskName = 'task_' + str(random.randrange(0,100))
@@ -91,6 +140,8 @@ tc.addStep('createTask',args=[taskName,tags],expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 
 tc = TestCase("Create new task without tags while authentified", "OK")
@@ -109,8 +160,10 @@ test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
 taskList = getTaskList(tc)
-
+print(taskList)
 # check unexistence by retrieving existing tasks, parsing the response to get the list of task names, etc...
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Create new task with unexisting tags while authentified", "OK")
 taskName = 'test200'
@@ -127,6 +180,8 @@ test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
 taskList = getTaskList(tc)
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Create new task with existing tags while authentified with another user", "OK")
 taskName = 'test300'
@@ -143,6 +198,8 @@ test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
 taskList = getTaskList(tc)
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Create new task with already existing title", "NOK")
 print(tc.title + " START :\n================================================")
@@ -156,6 +213,8 @@ tc.addStep('listTasks',expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Retrieve Task information for an existing task", "OK")
 print(tc.title + " START :\n================================================")
@@ -167,6 +226,8 @@ tc.addStep('getTaskInfo', args=[select_id], expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Update valid Task while unauthenticated", "NOK")
 print(tc.title + " START :\n================================================")
@@ -179,6 +240,8 @@ tc.addStep('updateTask', args=[select_id,updated_items['title'],updated_items['t
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 
 tc = TestCase("Update valid Task while authenticated as the owner - change status, tags and title", "OK")
@@ -199,6 +262,8 @@ tc.addStep('getTaskInfo', args=[select_id], expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 
 tc = TestCase("Update valid Task while authenticated as the NOT the owner - change status, tags and title", "NOK")
@@ -220,14 +285,16 @@ tc.addStep('getTaskInfo', args=[select_id], expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 # TODO
 #response = tr.listTags()
 #response = tr.getTagInfo(2)
-tc = TestCase("Retrieve all the tags","OK")
-print(tc.title + " START :\n================================================")
-expected_result = init_expected_result()
-tc.addStep("listTags", expected=expected_result)
+# tc = TestCase("Retrieve all the tags","OK")
+# print(tc.title + " START :\n================================================")
+# expected_result = init_expected_result()
+# tc.addStep("listTags", expected=expected_result)
 
 
 tc = TestCase("Delete task while authentified as NOT the owner", "NOK")
@@ -242,6 +309,8 @@ tc.addStep('deleteTask',args=[select_id], expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 
 tc = TestCase("Delete task while authentified as the owner", "OK")
@@ -257,6 +326,8 @@ tc.addStep('deleteTask',args=[select_id], expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
 tc = TestCase("Retrieve Task information for unexisting task", "NOK")
 print(tc.title + " START :\n================================================")
@@ -271,8 +342,10 @@ tc.addStep('getTaskInfo', args=[select_id], expected=expected_result)
 test_result = tc.executeTest()
 printResults(tc.results)
 print(tc.title + " END \n================================================")
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
 
-
+array2csv(results, './test.csv')
 
 
 
