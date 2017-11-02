@@ -20,28 +20,43 @@ def array2csv(input, filename):
       line  = line + '\n'
       f.write(line)
    f.close
-
-tagList = []
    
-# small test
-tc = TestCase("Retrieve all the tags","OK")
-print(tc.title + " START :\n================================================")
-expected_result = init_expected_result()
-expected_result['status'] = 200
-expected_result['content'] = [[".", tagList, "tagDictEqual"]]
-expected_result['responseTime'] = maxResponseTime
-tc.addStep("listTags", expected=expected_result)
-test_result = tc.executeTest()
-printResults(tc.results)
+def csv2array(filename):
+   out = []
+   f = open(filename,'r')
+   for line in f:
+      splitline = line.split(';')
+      splitline.pop()
+      out.append(splitline)
+   f.close()
+   return out
+   
+def file2json(filename):
+   str = ''
+   f = open(filename,'r')
+   for line in f:
+      str+= line
+   f.close()
+   return json.loads(str)
 
-tagDict = getTagDict(tc)
-
-print(type(tagDict))
-print(tagDict)
-
+logdir = './log'
 try:
-   os.remove('./smallLog.txt')
-except:
+   os.mkdir(logdir)
+except OSError:
    pass
-logResults(tc, 1, test_result, './smallLog.txt')
-array2csv(results, './test.csv')
+
+datadir = './data'
+try:
+   os.mkdir(datadir)
+except OSError:
+   pass
+   
+userFilename = datadir + '/users.csv'
+taskFilename = datadir + '/taskList.txt'
+tagFilename = datadir + '/tagList.txt'
+
+print(csv2array(userFilename))
+taskList = file2json(taskFilename)
+print(taskList)
+tagList = file2json(tagFilename)
+print(tagList)

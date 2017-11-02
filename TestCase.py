@@ -142,6 +142,16 @@ class TestCase:
                      self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
                      return False
             elif method == "taskDictListEqual":
+               # sort tags:
+               for task in actual_value:
+                  tagList = task['tags']
+                  tagList = sorted(tagList, key=lambda tag: tag['name'])
+                  task['tags'] = tagList
+               for task in expected_value:
+                  tagList = task['tags']
+                  tagList = sorted(tagList, key=lambda tag: tag['name'])
+                  task['tags'] = tagList
+               # sort:
                actual_value = sorted(actual_value, key=lambda task: task['id'])
                expected_value = sorted(expected_value, key=lambda task: task['id'])
                if len(actual_value) == len(expected_value):
@@ -155,10 +165,10 @@ class TestCase:
                   if same:
                      testResultString = testResultString + path + ' OK \n'
                   else:
-                     self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
+                     self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + ' \n VS \n' + str(expected_value) + '\n'
                      return False
                else:
-                  self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
+                  self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + ' \n VS \n' + str(expected_value) + '\n'
                   return False
             elif method == "tagDictEqual":
                if (len(actual_value) == 0) & (len(expected_value) == 0):
@@ -222,6 +232,8 @@ class TestCase:
             testResultString = testResultString + 'Response time OK\n'
             
       self.results[stepIndex]['testResult'] = testResultString
+      if 'NOK' in testResultString:
+         return False
       return True
    
    def checkToken(self,token):

@@ -7,14 +7,6 @@ import process_results
 from process_results import *
 import os
 
-def getCSVdata(filename):
-   out = []
-   f = open(filename,'r')
-   for line in f:
-      out.append(split(line,';'))
-   f.close()
-   
-   return out
 
 def array2csv(input, filename):
    f = open(filename,'w')
@@ -27,9 +19,22 @@ def array2csv(input, filename):
    f.close
 
 def csv2array(filename):
+   out = []
    f = open(filename,'r')
-   
+   for line in f:
+      splitline = line.split(';')
+      splitline.pop()
+      out.append(splitline)
    f.close()
+   return out
+
+def file2json(filename):
+   str = ''
+   f = open(filename,'r')
+   for line in f:
+      str+= line
+   f.close()
+   return json.loads(str)
 
 logdir = './log'
 try:
@@ -51,7 +56,7 @@ currentTime = time.strftime("%Y%m%d%H%M%S")
 logfilename = logdir + '/logfile' + currentTime + '.txt'
 reportFilename = logdir + '/testReport' + currentTime + '.csv'
       
-fromFile = False
+fromFile = True
 if not fromFile:
    users = []
    mainUser = "QA"
@@ -63,7 +68,7 @@ if not fromFile:
    taskList=[]
    tagDict = {}
 else:
-   users = getCSVdata(userFilename)
+   users = csv2array(userFilename)
    if len(users) > 0:
       mainUser = users[0][0]
       password = users[0][1]
@@ -76,9 +81,14 @@ else:
    else:
       otherUser = "toto"
       otherPassword = "totoro"
-   # taskList = getCSVdata('./taskList.csv')
-   # if len(taskList) > 0:
-      # todo
+   taskList = file2json(taskFilename)
+   tagDict = file2json(tagFilename)
+   # build lightTaskList and lightTagList on this:
+   lightTaskList = jsonpath.jsonpath(taskList, "$[*].title")
+   lightTagList = []
+   for k,v in tagDict.items():
+      lightTagList.append(k)
+      
 
 userUnexists = "casper"
 maxResponseTime = 1.0
@@ -97,7 +107,7 @@ if not fromFile:
    time.sleep(sleepDelay)
 
 testNumber = 1
-tc = TestCase("listTasks - empty list - no authentication", "OK")
+tc = TestCase("listTasks - no authentication", "OK")
 expected_result = expected_listTasks(taskList)
 tc.addStep('listTasks',expected=expected_result)
 test_result = tc.executeTest()
@@ -250,7 +260,12 @@ testNumber+=1
 if test_result:
    lightTaskList.append(taskName)
    taskList = getTaskList(tc)
-   # must be here because the last request must be listTasks
+else:
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
    
 time.sleep(sleepDelay)
 
@@ -276,6 +291,11 @@ test_result = tc.executeTest()
 logResults(tc, testNumber, test_result, logfilename)
 if not test_result:
    results = results2Array(tc, testNumber, test_result, results)
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
 testNumber+=1
 if test_result:
    lightTaskList.append(taskName)
@@ -320,6 +340,12 @@ if test_result:
    taskList = getTaskList(tc)
    # clean the lightTagList from duplicates
    lightTagList = list(set(lightTagList))
+else:
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
 
 time.sleep(sleepDelay)
 
@@ -355,6 +381,11 @@ test_result = tc.executeTest()
 logResults(tc, testNumber, test_result, logfilename)
 if not test_result:
    results = results2Array(tc, testNumber, test_result, results)
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
 testNumber+=1
 if test_result:
    lightTaskList.append(taskName)
@@ -389,11 +420,17 @@ testNumber+=1
 if test_result:
    lightTaskList.append(taskName)
    taskList = getTaskList(tc)
+else:
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
 
 time.sleep(sleepDelay)
 
 # do it twice:
-tc = TestCase("Create new task with existing tags while authentified with another user", "OK")
+tc = TestCase("2nd Create new task with existing tags while authentified with another user", "OK")
 # generate random taskname:
 randRange = 100
 randomIndex = random.randrange(0,randRange)
@@ -414,6 +451,11 @@ test_result = tc.executeTest()
 logResults(tc, testNumber, test_result, logfilename)
 if not test_result:
    results = results2Array(tc, testNumber, test_result, results)
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
 testNumber+=1
 if test_result:
    lightTaskList.append(taskName)
@@ -430,12 +472,14 @@ tc.addStep('authenticate',expected=expected_result)
 expected_result = expected_newTask(mainUser,taskName,tags,False)
 tc.addStep('createTask',args=[taskName,tags],expected=expected_result)
 expected_result = expected_listTasks()
-tc.addStep('listTasks',expected=expected_result)
-test_result = tc.executeTest()
 logResults(tc, testNumber, test_result, logfilename)
 results = results2Array(tc, testNumber, test_result, results)
 testNumber+=1
 if not test_result:
+   # must retrieve taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
    taskList = getTaskList(tc)
 
 time.sleep(sleepDelay)
@@ -471,6 +515,10 @@ logResults(tc, testNumber, test_result, logfilename)
 results = results2Array(tc, testNumber, test_result, results)
 testNumber+=1
 if not test_result:
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
    taskList = getTaskList(tc)
 
 time.sleep(sleepDelay)
@@ -500,6 +548,8 @@ tc.addStep('updateTask', args=[select_id,updated_items['title'],updated_items['t
 # get task info to check the update:
 expected_result = expected_taskInfo([select_id, updated_items])
 tc.addStep('getTaskInfo', args=[select_id], expected=expected_result)
+expected_result = expected_listTasks(taskList,newTaskName,[newTag])
+tc.addStep('listTasks',expected=expected_result)
 test_result = tc.executeTest()
 logResults(tc, testNumber, test_result, logfilename)
 results = results2Array(tc, testNumber, test_result, results)
@@ -560,7 +610,10 @@ results = results2Array(tc, testNumber, test_result, results)
 testNumber+=1
 if test_result:
    tagDict = getTagDict(tc)
-
+   lightTagList = []
+   for k,v in tagDict.items():
+      lightTagList.append(k)
+      
 # response = tr.getTagInfo(2)
 tc = TestCase("Retrieve tag details for an existing tag", "OK")
 randomIndex = random.randrange(len(lightTagList))
