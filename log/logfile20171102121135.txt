@@ -8,10 +8,10 @@ request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:31 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:36 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
 []
 
-0:00:00.014058
+0:00:00.013642
 HTML Status code OK
 Response time OK
 
@@ -30,14 +30,14 @@ request body:
 {"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:32 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjEzMiwiaWF0IjoxNTA5NTk1NTMyfQ.eyJpZCI6MX0.mSFW7M1CWjZnrPoaOQB2tmhE1QGBSt8mB2z6cvkYjWI", 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTY5NywiaWF0IjoxNTA5NjIxMDk3fQ.eyJpZCI6MX0.Q-3bhqADExBDlGDEZE1Y_TpfiNO7nUeldQupvv_PtSQ", 
     "username": "QA"
 }
 
-0:00:00.019885
+0:00:00.015960
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -62,12 +62,12 @@ request body:
 {"username": "casper", "password": "willWin"}
 Response:
 401
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:32 GMT', 'Content-Type': 'application/json', 'Content-Length': '40', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '40', 'Connection': 'keep-alive'}
 {
     "message": "Bad authentication"
 }
 
-0:00:00.012793
+0:00:00.012777
 HTML Status code OK
 $.message exists 
 $.message OK 
@@ -83,12 +83,12 @@ Request POST http://debauve.qatest.dataiku.com:80/users
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'}
 request body:
-{"username": "user95", "password": "willWin"}
+{"username": "user55", "password": "willWin"}
 Response:
 500
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:33 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '21', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:38 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '21', 'Connection': 'keep-alive'}
 Internal Server Error
-0:00:00.019619
+0:00:00.012855
 status code NOK: got 500 instead of expected 200
 Create new user with existing password END 
 ================================================ 
@@ -100,15 +100,15 @@ Request POST http://debauve.qatest.dataiku.com:80/users
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '43', 'Content-Type': 'application/json'}
 request body:
-{"username": "user46", "password": "pwd46"}
+{"username": "user18", "password": "pwd18"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:34 GMT', 'Content-Type': 'application/json', 'Content-Length': '29', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:39 GMT', 'Content-Type': 'application/json', 'Content-Length': '29', 'Connection': 'keep-alive'}
 {
-    "username": "user46"
+    "username": "user18"
 }
 
-0:00:00.020319
+0:00:00.020650
 HTML Status code OK
 $.username exists 
 $.username OK 
@@ -121,17 +121,17 @@ Request POST http://debauve.qatest.dataiku.com:80/authenticate
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '43', 'Content-Type': 'application/json'}
 request body:
-{"username": "user46", "password": "pwd46"}
+{"username": "user18", "password": "pwd18"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:34 GMT', 'Content-Type': 'application/json', 'Content-Length': '190', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:39 GMT', 'Content-Type': 'application/json', 'Content-Length': '190', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjEzNCwiaWF0IjoxNTA5NTk1NTM0fQ.eyJpZCI6Mn0.tUixTrrDMGdpP6sC8O-7BnHA0H0GfJ37zF4EUxLjHLU", 
-    "username": "user46"
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTY5OSwiaWF0IjoxNTA5NjIxMDk5fQ.eyJpZCI6Mn0.TL4EftWq4y83uFv6gIvluPrAU4y_WBv6u_wgb--BkZY", 
+    "username": "user18"
 }
 
-0:00:00.016089
+0:00:00.015966
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -154,9 +154,9 @@ request body:
 {"username": "QA", "password": "blablabla"}
 Response:
 500
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:35 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '21', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:40 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '21', 'Connection': 'keep-alive'}
 Internal Server Error
-0:00:00.014261
+0:00:00.017194
 HTML Status code NOK: 500 shows inappropriate error managment 
 Response time OK
 
@@ -170,12 +170,12 @@ Request PUT http://debauve.qatest.dataiku.com:80/
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '32', 'Content-Type': 'application/json'}
 request body:
-{"title": "task_76", "tags": []}
+{"title": "task_66", "tags": []}
 Response:
 401
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:36 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '19', 'Connection': 'keep-alive', 'WWW-Authenticate': 'Basic realm="Authentication Required"'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:42 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '19', 'Connection': 'keep-alive', 'WWW-Authenticate': 'Basic realm="Authentication Required"'}
 Unauthorized Access
-0:00:00.018302
+0:00:00.016229
 HTML Status code OK
 Response time OK
 
@@ -194,14 +194,14 @@ request body:
 {"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:43 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjEzNywiaWF0IjoxNTA5NTk1NTM3fQ.eyJpZCI6MX0.lE1OsQmqDCvr8x7nPclIle4VJ6sNhSB-J8M2id1n3Eg", 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcwMywiaWF0IjoxNTA5NjIxMTAzfQ.eyJpZCI6MX0.l9nJlnh3Nw1ASVCz8iAGunzGsXRuwnMVwGUZHC-ckD4", 
     "username": "QA"
 }
 
-0:00:00.014074
+0:00:00.017655
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -214,25 +214,25 @@ Response time OK
 Step #2
 Request PUT http://debauve.qatest.dataiku.com:80/
 request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '32', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '31', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
 request body:
-{"title": "task_69", "tags": []}
+{"title": "task_8", "tags": []}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '145', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:43 GMT', 'Content-Type': 'application/json', 'Content-Length': '144', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:37.305490Z", 
+    "date": "2017-11-02T12:11:43.065017Z", 
     "done": false, 
     "id": 1, 
     "tags": [], 
-    "title": "task_69", 
+    "title": "task_8", 
     "username": "QA"
 }
 
-0:00:00.021437
+0:00:00.020263
 HTML Status code OK
 $.date exists 
-$.date NOK: 2017-11-02T05:05:37.305490Z
+$.date NOK: 2017-11-02T12:11:43.065017Z
 $.done exists 
 $.done OK 
 $.tags[*].name OK 
@@ -257,14 +257,14 @@ request body:
 {"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:38 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:44 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjEzOCwiaWF0IjoxNTA5NTk1NTM4fQ.eyJpZCI6MX0.WDMgG_VxmRT0yscoCZioaPyn-ViU_mjhxFaN7Jaevr0", 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcwNCwiaWF0IjoxNTA5NjIxMTA0fQ.eyJpZCI6MX0.tSFg0J3mzSAQAuAmHB2Ivqs5DqF2UHHKFdmt5TP1C-Y", 
     "username": "QA"
 }
 
-0:00:00.012506
+0:00:00.013764
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -279,23 +279,23 @@ Request PUT http://debauve.qatest.dataiku.com:80/
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '32', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
 request body:
-{"title": "task_26", "tags": []}
+{"title": "task_90", "tags": []}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:38 GMT', 'Content-Type': 'application/json', 'Content-Length': '145', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:44 GMT', 'Content-Type': 'application/json', 'Content-Length': '145', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:38.366437Z", 
+    "date": "2017-11-02T12:11:44.125950Z", 
     "done": false, 
     "id": 2, 
     "tags": [], 
-    "title": "task_26", 
+    "title": "task_90", 
     "username": "QA"
 }
 
-0:00:00.020070
+0:00:00.017024
 HTML Status code OK
 $.date exists 
-$.date NOK: 2017-11-02T05:05:38.366437Z
+$.date NOK: 2017-11-02T12:11:44.125950Z
 $.done exists 
 $.done OK 
 $.tags[*].name OK 
@@ -306,6 +306,58 @@ $.username OK
 Response time OK
 
 2nd Create new task without tags while authentified END 
+================================================ 
+
+Create new task with title > 20 while authentified START :
+================================================ 
+Step #0
+setCredentials
+Step #1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/json'}
+request body:
+{"username": "QA", "password": "willWin"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:45 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcwNSwiaWF0IjoxNTA5NjIxMTA1fQ.eyJpZCI6MX0.rygx2zFnt2poID9ocEVRbOdKgSYa17KjYNemwdwsQTM", 
+    "username": "QA"
+}
+
+0:00:00.017689
+HTML Status code OK
+$.expires exists 
+$.expires OK 
+$.token exists 
+$.token OK 
+$.username exists 
+$.username OK 
+Response time OK
+
+Step #2
+Request PUT http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '52', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+request body:
+{"title": "anticonstitutionnellement21", "tags": []}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:45 GMT', 'Content-Type': 'application/json', 'Content-Length': '165', 'Connection': 'keep-alive'}
+{
+    "date": "2017-11-02T12:11:45.186229Z", 
+    "done": false, 
+    "id": 3, 
+    "tags": [], 
+    "title": "anticonstitutionnellement21", 
+    "username": "QA"
+}
+
+0:00:00.020538
+status code NOK: got 200 instead of expected [400, 401]
+Create new task with title > 20 while authentified END 
 ================================================ 
 
 Create new task with unexisting tags while authentified START :
@@ -320,14 +372,14 @@ request body:
 {"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:39 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:46 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjEzOSwiaWF0IjoxNTA5NTk1NTM5fQ.eyJpZCI6MX0.qSWP_MxwoOVB0aoGK1W0e-O3Hp1tniMQn-2agNANDb0", 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcwNiwiaWF0IjoxNTA5NjIxMTA2fQ.eyJpZCI6MX0.Mf3hVuiG9-8nz8VQnDj9LOeWy2zRj91DOQ-ebs9v-Ow", 
     "username": "QA"
 }
 
-0:00:00.013409
+0:00:00.013045
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -340,51 +392,34 @@ Response time OK
 Step #2
 Request PUT http://debauve.qatest.dataiku.com:80/
 request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '69', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '48', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
 request body:
-{"title": "task_37", "tags": ["tag37", "tag118", "tag293", "tag323"]}
+{"title": "task_70", "tags": ["tag70", "tag70"]}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:39 GMT', 'Content-Type': 'application/json', 'Content-Length': '559', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:46 GMT', 'Content-Type': 'application/json', 'Content-Length': '250', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:39.420683Z", 
+    "date": "2017-11-02T12:11:46.241154Z", 
     "done": false, 
-    "id": 3, 
+    "id": 4, 
     "tags": [
         {
-            "name": "tag118", 
-            "url": "http://localhost:5000/tags/2"
-        }, 
-        {
-            "name": "tag293", 
-            "url": "http://localhost:5000/tags/3"
-        }, 
-        {
-            "name": "tag37", 
+            "name": "tag70", 
             "url": "http://localhost:5000/tags/1"
-        }, 
-        {
-            "name": "tag323", 
-            "url": "http://localhost:5000/tags/4"
         }
     ], 
-    "title": "task_37", 
+    "title": "task_70", 
     "username": "QA"
 }
 
-0:00:00.018773
+0:00:00.015794
 HTML Status code OK
 $.date exists 
-$.date NOK: 2017-11-02T05:05:39.420683Z
+$.date NOK: 2017-11-02T12:11:46.241154Z
 $.done exists 
 $.done OK 
 $.tags[*].name exists 
-$.tags[*].name OK 
-$.title exists 
-$.title OK 
-$.username exists 
-$.username OK 
-Response time OK
+$.tags[*].name NOK in response: ['tag70']
 
 Create new task with unexisting tags while authentified END 
 ================================================ 
@@ -401,14 +436,14 @@ request body:
 {"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:47 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjE0MCwiaWF0IjoxNTA5NTk1NTQwfQ.eyJpZCI6MX0.DRytKZNtVRh6OeY6XuGjoQzfjzwrq10woNYimED4nc0", 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcwNywiaWF0IjoxNTA5NjIxMTA3fQ.eyJpZCI6MX0.vuH34IIlfiL6N-YlTuw4g1CrIz15yd6r8EDlkJ92qu0", 
     "username": "QA"
 }
 
-0:00:00.014372
+0:00:00.018318
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -421,156 +456,58 @@ Response time OK
 Step #2
 Request PUT http://debauve.qatest.dataiku.com:80/
 request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '69', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '48', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
 request body:
-{"title": "task_51", "tags": ["tag51", "tag168", "tag225", "tag397"]}
+{"title": "task_68", "tags": ["tag68", "tag68"]}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '559', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:47 GMT', 'Content-Type': 'application/json', 'Content-Length': '250', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:40.478638Z", 
-    "done": false, 
-    "id": 4, 
-    "tags": [
-        {
-            "name": "tag51", 
-            "url": "http://localhost:5000/tags/5"
-        }, 
-        {
-            "name": "tag397", 
-            "url": "http://localhost:5000/tags/8"
-        }, 
-        {
-            "name": "tag225", 
-            "url": "http://localhost:5000/tags/7"
-        }, 
-        {
-            "name": "tag168", 
-            "url": "http://localhost:5000/tags/6"
-        }
-    ], 
-    "title": "task_51", 
-    "username": "QA"
-}
-
-0:00:00.018234
-HTML Status code OK
-$.date exists 
-$.date NOK: 2017-11-02T05:05:40.478638Z
-$.done exists 
-$.done OK 
-$.tags[*].name exists 
-$.tags[*].name OK 
-$.title exists 
-$.title OK 
-$.username exists 
-$.username OK 
-Response time OK
-
-2nd Create new task with unexisting tags while authentified END 
-================================================ 
-
-Create new task with existing tags while authentified with another user START :
-================================================ 
-Step #0
-setCredentials
-Step #1
-Request POST http://debauve.qatest.dataiku.com:80/authenticate
-request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '43', 'Content-Type': 'application/json'}
-request body:
-{"username": "user46", "password": "pwd46"}
-Response:
-200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '190', 'Connection': 'keep-alive'}
-{
-    "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjE0MSwiaWF0IjoxNTA5NTk1NTQxfQ.eyJpZCI6Mn0.4Fiodmb6tnxwd40NZPi5eUpJbKQHAehDIkXKLeSmfW4", 
-    "username": "user46"
-}
-
-0:00:00.019927
-HTML Status code OK
-$.expires exists 
-$.expires OK 
-$.token exists 
-$.token OK 
-$.username exists 
-$.username OK 
-Response time OK
-
-Step #2
-Request PUT http://debauve.qatest.dataiku.com:80/
-request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '69', 'Authorization': 'Basic dXNlcjQ2OnB3ZDQ2', 'Content-Type': 'application/json'}
-request body:
-{"title": "task_41", "tags": ["tag168", "tag225", "tag397", "tag51"]}
-Response:
-200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '563', 'Connection': 'keep-alive'}
-{
-    "date": "2017-11-02T05:05:41.543706Z", 
+    "date": "2017-11-02T12:11:47.303810Z", 
     "done": false, 
     "id": 5, 
     "tags": [
         {
-            "name": "tag168", 
-            "url": "http://localhost:5000/tags/6"
-        }, 
-        {
-            "name": "tag225", 
-            "url": "http://localhost:5000/tags/7"
-        }, 
-        {
-            "name": "tag397", 
-            "url": "http://localhost:5000/tags/8"
-        }, 
-        {
-            "name": "tag51", 
-            "url": "http://localhost:5000/tags/5"
+            "name": "tag68", 
+            "url": "http://localhost:5000/tags/2"
         }
     ], 
-    "title": "task_41", 
-    "username": "user46"
+    "title": "task_68", 
+    "username": "QA"
 }
 
-0:00:00.019198
+0:00:00.017548
 HTML Status code OK
 $.date exists 
-$.date NOK: 2017-11-02T05:05:41.543706Z
+$.date NOK: 2017-11-02T12:11:47.303810Z
 $.done exists 
 $.done OK 
 $.tags[*].name exists 
-$.tags[*].name OK 
-$.title exists 
-$.title OK 
-$.username exists 
-$.username OK 
-Response time OK
+$.tags[*].name NOK in response: ['tag68']
 
-Create new task with existing tags while authentified with another user END 
+2nd Create new task with unexisting tags while authentified END 
 ================================================ 
 
-2nd Create new task with existing tags while authentified with another user START :
+Create new task with tags > 20 char, while authentified START :
 ================================================ 
 Step #0
 setCredentials
 Step #1
 Request POST http://debauve.qatest.dataiku.com:80/authenticate
 request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '43', 'Content-Type': 'application/json'}
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/json'}
 request body:
-{"username": "user46", "password": "pwd46"}
+{"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:42 GMT', 'Content-Type': 'application/json', 'Content-Length': '190', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:48 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjE0MiwiaWF0IjoxNTA5NTk1NTQyfQ.eyJpZCI6Mn0.uJyKYFvahxtwycdEZNYddrZ7bJIVQ5wk3RFiWG2hm80", 
-    "username": "user46"
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcwOCwiaWF0IjoxNTA5NjIxMTA4fQ.eyJpZCI6MX0.EvzcpV4qvymA4OGbOdYDTobORUSoMvGqE3C4GOlSXls", 
+    "username": "QA"
 }
 
-0:00:00.019716
+0:00:00.018702
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -583,42 +520,76 @@ Response time OK
 Step #2
 Request PUT http://debauve.qatest.dataiku.com:80/
 request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '69', 'Authorization': 'Basic dXNlcjQ2OnB3ZDQ2', 'Content-Type': 'application/json'}
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '64', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
 request body:
-{"title": "task_10", "tags": ["tag168", "tag225", "tag397", "tag51"]}
+{"title": "task_17", "tags": ["tagAnticonstitutionnellement17"]}
+Response:
+500
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:48 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '21', 'Connection': 'keep-alive'}
+Internal Server Error
+0:00:00.018628
+HTML Status code NOK: 500 shows inappropriate error managment 
+Response time OK
+
+Create new task with tags > 20 char, while authentified END 
+================================================ 
+
+Create new task with existing tag while authentified with another user START :
+================================================ 
+Step #0
+setCredentials
+Step #1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '43', 'Content-Type': 'application/json'}
+request body:
+{"username": "user18", "password": "pwd18"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:42 GMT', 'Content-Type': 'application/json', 'Content-Length': '563', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:49 GMT', 'Content-Type': 'application/json', 'Content-Length': '190', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:42.611501Z", 
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcwOSwiaWF0IjoxNTA5NjIxMTA5fQ.eyJpZCI6Mn0.qKuKEyHhdvapTHOb31eWkyUgKgGzwe5ryzaKje56WN0", 
+    "username": "user18"
+}
+
+0:00:00.015528
+HTML Status code OK
+$.expires exists 
+$.expires OK 
+$.token exists 
+$.token OK 
+$.username exists 
+$.username OK 
+Response time OK
+
+Step #2
+Request PUT http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '39', 'Authorization': 'Basic dXNlcjE4OnB3ZDE4', 'Content-Type': 'application/json'}
+request body:
+{"title": "task_89", "tags": ["tag68"]}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:49 GMT', 'Content-Type': 'application/json', 'Content-Length': '254', 'Connection': 'keep-alive'}
+{
+    "date": "2017-11-02T12:11:49.443027Z", 
     "done": false, 
     "id": 6, 
     "tags": [
         {
-            "name": "tag225", 
-            "url": "http://localhost:5000/tags/7"
-        }, 
-        {
-            "name": "tag51", 
-            "url": "http://localhost:5000/tags/5"
-        }, 
-        {
-            "name": "tag168", 
-            "url": "http://localhost:5000/tags/6"
-        }, 
-        {
-            "name": "tag397", 
-            "url": "http://localhost:5000/tags/8"
+            "name": "tag68", 
+            "url": "http://localhost:5000/tags/2"
         }
     ], 
-    "title": "task_10", 
-    "username": "user46"
+    "title": "task_89", 
+    "username": "user18"
 }
 
-0:00:00.020111
+0:00:00.024345
 HTML Status code OK
 $.date exists 
-$.date NOK: 2017-11-02T05:05:42.611501Z
+$.date NOK: 2017-11-02T12:11:49.443027Z
 $.done exists 
 $.done OK 
 $.tags[*].name exists 
@@ -629,52 +600,145 @@ $.username exists
 $.username OK 
 Response time OK
 
-2nd Create new task with existing tags while authentified with another user END 
+Create new task with existing tag while authentified with another user END 
+================================================ 
+
+2nd Create new task with existing tag while authentified with another user START :
+================================================ 
+Step #0
+setCredentials
+Step #1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '43', 'Content-Type': 'application/json'}
+request body:
+{"username": "user18", "password": "pwd18"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:50 GMT', 'Content-Type': 'application/json', 'Content-Length': '190', 'Connection': 'keep-alive'}
+{
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcxMCwiaWF0IjoxNTA5NjIxMTEwfQ.eyJpZCI6Mn0.9V3bx1-fbcNIrsAaG1TbVOatdstI2uCPcDVLmBJi4oQ", 
+    "username": "user18"
+}
+
+0:00:00.011781
+HTML Status code OK
+$.expires exists 
+$.expires OK 
+$.token exists 
+$.token OK 
+$.username exists 
+$.username OK 
+Response time OK
+
+Step #2
+Request PUT http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '39', 'Authorization': 'Basic dXNlcjE4OnB3ZDE4', 'Content-Type': 'application/json'}
+request body:
+{"title": "task_27", "tags": ["tag68"]}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:50 GMT', 'Content-Type': 'application/json', 'Content-Length': '254', 'Connection': 'keep-alive'}
+{
+    "date": "2017-11-02T12:11:50.500002Z", 
+    "done": false, 
+    "id": 7, 
+    "tags": [
+        {
+            "name": "tag68", 
+            "url": "http://localhost:5000/tags/2"
+        }
+    ], 
+    "title": "task_27", 
+    "username": "user18"
+}
+
+0:00:00.019072
+HTML Status code OK
+$.date exists 
+$.date NOK: 2017-11-02T12:11:50.500002Z
+$.done exists 
+$.done OK 
+$.tags[*].name exists 
+$.tags[*].name OK 
+$.title exists 
+$.title OK 
+$.username exists 
+$.username OK 
+Response time OK
+
+2nd Create new task with existing tag while authentified with another user END 
 ================================================ 
 
 Create new task with already existing title START :
 ================================================ 
+Step #0
+setCredentials
+Step #1
+Request POST http://debauve.qatest.dataiku.com:80/authenticate
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/json'}
+request body:
+{"username": "QA", "password": "willWin"}
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:51 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{
+    "expires": 600, 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcxMSwiaWF0IjoxNTA5NjIxMTExfQ.eyJpZCI6MX0.JFeZIVkfkN1MagdKWZveHX-Rth8HA26Iv4iWZPPM6iY", 
+    "username": "QA"
+}
+
+0:00:00.014536
+HTML Status code OK
+$.expires exists 
+$.expires OK 
+$.token exists 
+$.token OK 
+$.username exists 
+$.username OK 
+Response time OK
+
+Step #2
+Request PUT http://debauve.qatest.dataiku.com:80/
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '39', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+request body:
+{"title": "task_27", "tags": ["tag68"]}
+Response:
+500
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:51 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '21', 'Connection': 'keep-alive'}
+Internal Server Error
+0:00:00.012958
+HTML Status code NOK: 500 shows inappropriate error managment 
+Response time OK
+
 Create new task with already existing title END 
 ================================================ 
 
 Retrieve Task information for an existing task START :
 ================================================ 
 Step #0
-Request GET http://debauve.qatest.dataiku.com:80/4
+Request GET http://debauve.qatest.dataiku.com:80/1
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
 request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:45 GMT', 'Content-Type': 'application/json', 'Content-Length': '559', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:53 GMT', 'Content-Type': 'application/json', 'Content-Length': '144', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:40.478638Z", 
+    "date": "2017-11-02T12:11:43.065017Z", 
     "done": false, 
-    "id": 4, 
-    "tags": [
-        {
-            "name": "tag51", 
-            "url": "http://localhost:5000/tags/5"
-        }, 
-        {
-            "name": "tag397", 
-            "url": "http://localhost:5000/tags/8"
-        }, 
-        {
-            "name": "tag225", 
-            "url": "http://localhost:5000/tags/7"
-        }, 
-        {
-            "name": "tag168", 
-            "url": "http://localhost:5000/tags/6"
-        }
-    ], 
-    "title": "task_51", 
+    "id": 1, 
+    "tags": [], 
+    "title": "task_8", 
     "username": "QA"
 }
 
-0:00:00.519882
+0:00:00.514132
 HTML Status code OK
 $.date exists 
 $.done exists 
@@ -691,16 +755,16 @@ Retrieve Task information for an existing task END
 Update valid Task while unauthenticated START :
 ================================================ 
 Step #0
-Request PATCH http://debauve.qatest.dataiku.com:80/4
+Request PATCH http://debauve.qatest.dataiku.com:80/1
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '56', 'Content-Type': 'application/json'}
 request body:
 {"title": "updateNOK", "tags": ["upTag1"], "done": true}
 Response:
 401
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:46 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '19', 'Connection': 'keep-alive', 'WWW-Authenticate': 'Basic realm="Authentication Required"'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:54 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '19', 'Connection': 'keep-alive', 'WWW-Authenticate': 'Basic realm="Authentication Required"'}
 Unauthorized Access
-0:00:00.012543
+0:00:00.021153
 HTML Status code OK
 Response time OK
 
@@ -719,14 +783,14 @@ request body:
 {"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:47 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:55 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjE0NywiaWF0IjoxNTA5NTk1NTQ3fQ.eyJpZCI6MX0.Y3z0NJgLdPAzKjtZhDwYonz5QTMWtwkKtY7KQLxVrCU", 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcxNSwiaWF0IjoxNTA5NjIxMTE1fQ.eyJpZCI6MX0.soyt8D670-M_FbJmTdY6dbrnY3KA61HHja01xSp5GXk", 
     "username": "QA"
 }
 
-0:00:00.015234
+0:00:00.014875
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -739,27 +803,27 @@ Response time OK
 Step #2
 Request PATCH http://debauve.qatest.dataiku.com:80/1
 request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '63', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '61', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
 request body:
-{"title": "task_69updateOK", "tags": ["upTag10"], "done": true}
+{"title": "task_8updateOK", "tags": ["upTag0"], "done": true}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:47 GMT', 'Content-Type': 'application/json', 'Content-Length': '259', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:55 GMT', 'Content-Type': 'application/json', 'Content-Length': '257', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:37.305490Z", 
+    "date": "2017-11-02T12:11:43.065017Z", 
     "done": true, 
     "id": 1, 
     "tags": [
         {
-            "name": "upTag10", 
-            "url": "http://localhost:5000/tags/9"
+            "name": "upTag0", 
+            "url": "http://localhost:5000/tags/3"
         }
     ], 
-    "title": "task_69updateOK", 
+    "title": "task_8updateOK", 
     "username": "QA"
 }
 
-0:00:00.020620
+0:00:00.019996
 HTML Status code OK
 $.date exists 
 $.done exists 
@@ -780,22 +844,22 @@ request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:47 GMT', 'Content-Type': 'application/json', 'Content-Length': '259', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:55 GMT', 'Content-Type': 'application/json', 'Content-Length': '257', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:37.305490Z", 
+    "date": "2017-11-02T12:11:43.065017Z", 
     "done": true, 
     "id": 1, 
     "tags": [
         {
-            "name": "upTag10", 
-            "url": "http://localhost:5000/tags/9"
+            "name": "upTag0", 
+            "url": "http://localhost:5000/tags/3"
         }
     ], 
-    "title": "task_69updateOK", 
+    "title": "task_8updateOK", 
     "username": "QA"
 }
 
-0:00:00.516048
+0:00:00.513824
 HTML Status code OK
 $.date exists 
 $.done exists 
@@ -816,132 +880,92 @@ request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:47 GMT', 'Content-Type': 'application/json', 'Content-Length': '3146', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:55 GMT', 'Content-Type': 'application/json', 'Content-Length': '1915', 'Connection': 'keep-alive'}
 [
     {
-        "date": "2017-11-02T05:05:37.305490Z", 
+        "date": "2017-11-02T12:11:43.065017Z", 
         "done": true, 
         "id": 1, 
         "tags": [
             {
-                "name": "upTag10", 
-                "url": "http://localhost:5000/tags/9"
+                "name": "upTag0", 
+                "url": "http://localhost:5000/tags/3"
             }
         ], 
-        "title": "task_69updateOK", 
+        "title": "task_8updateOK", 
         "username": "QA"
     }, 
     {
-        "date": "2017-11-02T05:05:38.366437Z", 
+        "date": "2017-11-02T12:11:44.125950Z", 
         "done": false, 
         "id": 2, 
         "tags": [], 
-        "title": "task_26", 
+        "title": "task_90", 
         "username": "QA"
     }, 
     {
-        "date": "2017-11-02T05:05:39.420683Z", 
+        "date": "2017-11-02T12:11:45.186229Z", 
         "done": false, 
         "id": 3, 
-        "tags": [
-            {
-                "name": "tag293", 
-                "url": "http://localhost:5000/tags/3"
-            }, 
-            {
-                "name": "tag323", 
-                "url": "http://localhost:5000/tags/4"
-            }, 
-            {
-                "name": "tag118", 
-                "url": "http://localhost:5000/tags/2"
-            }, 
-            {
-                "name": "tag37", 
-                "url": "http://localhost:5000/tags/1"
-            }
-        ], 
-        "title": "task_37", 
+        "tags": [], 
+        "title": "anticonstitutionnellement21", 
         "username": "QA"
     }, 
     {
-        "date": "2017-11-02T05:05:40.478638Z", 
+        "date": "2017-11-02T12:11:46.241154Z", 
         "done": false, 
         "id": 4, 
         "tags": [
             {
-                "name": "tag168", 
-                "url": "http://localhost:5000/tags/6"
-            }, 
-            {
-                "name": "tag225", 
-                "url": "http://localhost:5000/tags/7"
-            }, 
-            {
-                "name": "tag51", 
-                "url": "http://localhost:5000/tags/5"
-            }, 
-            {
-                "name": "tag397", 
-                "url": "http://localhost:5000/tags/8"
+                "name": "tag70", 
+                "url": "http://localhost:5000/tags/1"
             }
         ], 
-        "title": "task_51", 
+        "title": "task_70", 
         "username": "QA"
     }, 
     {
-        "date": "2017-11-02T05:05:41.543706Z", 
+        "date": "2017-11-02T12:11:47.303810Z", 
         "done": false, 
         "id": 5, 
         "tags": [
             {
-                "name": "tag168", 
-                "url": "http://localhost:5000/tags/6"
-            }, 
-            {
-                "name": "tag225", 
-                "url": "http://localhost:5000/tags/7"
-            }, 
-            {
-                "name": "tag51", 
-                "url": "http://localhost:5000/tags/5"
-            }, 
-            {
-                "name": "tag397", 
-                "url": "http://localhost:5000/tags/8"
+                "name": "tag68", 
+                "url": "http://localhost:5000/tags/2"
             }
         ], 
-        "title": "task_41", 
-        "username": "user46"
+        "title": "task_68", 
+        "username": "QA"
     }, 
     {
-        "date": "2017-11-02T05:05:42.611501Z", 
+        "date": "2017-11-02T12:11:49.443027Z", 
         "done": false, 
         "id": 6, 
         "tags": [
             {
-                "name": "tag168", 
-                "url": "http://localhost:5000/tags/6"
-            }, 
-            {
-                "name": "tag225", 
-                "url": "http://localhost:5000/tags/7"
-            }, 
-            {
-                "name": "tag51", 
-                "url": "http://localhost:5000/tags/5"
-            }, 
-            {
-                "name": "tag397", 
-                "url": "http://localhost:5000/tags/8"
+                "name": "tag68", 
+                "url": "http://localhost:5000/tags/2"
             }
         ], 
-        "title": "task_10", 
-        "username": "user46"
+        "title": "task_89", 
+        "username": "user18"
+    }, 
+    {
+        "date": "2017-11-02T12:11:50.500002Z", 
+        "done": false, 
+        "id": 7, 
+        "tags": [
+            {
+                "name": "tag68", 
+                "url": "http://localhost:5000/tags/2"
+            }
+        ], 
+        "title": "task_27", 
+        "username": "user18"
     }
 ]
 
-0:00:00.015309
+0:00:00.018204
 HTML Status code OK
 $[*].date exists 
 $[*].done exists 
@@ -967,14 +991,14 @@ request body:
 {"username": "QA", "password": "willWin"}
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:48 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '186', 'Connection': 'keep-alive'}
 {
     "expires": 600, 
-    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTU5NjE0OCwiaWF0IjoxNTA5NTk1NTQ4fQ.eyJpZCI6MX0.E2GpRKv89W9qNKoGk58xiu7A-LzfU5FJFCMOkFwng0M", 
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTUwOTYyMTcxNiwiaWF0IjoxNTA5NjIxMTE2fQ.eyJpZCI6MX0.ueASr7PaFWtQ1dZgzTOenDeOoxsbufzFW-I1EtAJiSU", 
     "username": "QA"
 }
 
-0:00:00.015719
+0:00:00.015892
 HTML Status code OK
 $.expires exists 
 $.expires OK 
@@ -985,58 +1009,46 @@ $.username OK
 Response time OK
 
 Step #2
-Request PATCH http://debauve.qatest.dataiku.com:80/5
+Request PATCH http://debauve.qatest.dataiku.com:80/6
 request headers:
-{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '57', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '56', 'Authorization': 'Basic UUE6d2lsbFdpbg==', 'Content-Type': 'application/json'}
 request body:
-{"title": "updateNOK", "tags": ["upTag10"], "done": true}
+{"title": "updateNOK", "tags": ["upTag0"], "done": true}
 Response:
 403
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:48 GMT', 'Content-Type': 'application/json', 'Content-Length': '55', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '55', 'Connection': 'keep-alive'}
 {
     "message": "You're not the owner of this task"
 }
 
-0:00:00.014240
+0:00:00.018612
 HTML Status code OK
 Response time OK
 
 Step #3
-Request GET http://debauve.qatest.dataiku.com:80/5
+Request GET http://debauve.qatest.dataiku.com:80/6
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic UUE6d2lsbFdpbg=='}
 request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:49 GMT', 'Content-Type': 'application/json', 'Content-Length': '563', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:57 GMT', 'Content-Type': 'application/json', 'Content-Length': '254', 'Connection': 'keep-alive'}
 {
-    "date": "2017-11-02T05:05:41.543706Z", 
+    "date": "2017-11-02T12:11:49.443027Z", 
     "done": false, 
-    "id": 5, 
+    "id": 6, 
     "tags": [
         {
-            "name": "tag51", 
-            "url": "http://localhost:5000/tags/5"
-        }, 
-        {
-            "name": "tag397", 
-            "url": "http://localhost:5000/tags/8"
-        }, 
-        {
-            "name": "tag225", 
-            "url": "http://localhost:5000/tags/7"
-        }, 
-        {
-            "name": "tag168", 
-            "url": "http://localhost:5000/tags/6"
+            "name": "tag68", 
+            "url": "http://localhost:5000/tags/2"
         }
     ], 
-    "title": "task_41", 
-    "username": "user46"
+    "title": "task_89", 
+    "username": "user18"
 }
 
-0:00:00.520482
+0:00:00.518106
 HTML Status code OK
 $.date exists 
 $.done exists 
@@ -1062,20 +1074,14 @@ request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:50 GMT', 'Content-Type': 'application/json', 'Content-Length': '424', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:58 GMT', 'Content-Type': 'application/json', 'Content-Length': '141', 'Connection': 'keep-alive'}
 {
-    "tag118": "http://localhost:5000/tags/2", 
-    "tag168": "http://localhost:5000/tags/6", 
-    "tag225": "http://localhost:5000/tags/7", 
-    "tag293": "http://localhost:5000/tags/3", 
-    "tag323": "http://localhost:5000/tags/4", 
-    "tag37": "http://localhost:5000/tags/1", 
-    "tag397": "http://localhost:5000/tags/8", 
-    "tag51": "http://localhost:5000/tags/5", 
-    "upTag10": "http://localhost:5000/tags/9"
+    "tag68": "http://localhost:5000/tags/2", 
+    "tag70": "http://localhost:5000/tags/1", 
+    "upTag0": "http://localhost:5000/tags/3"
 }
 
-0:00:00.015497
+0:00:00.013374
 HTML Status code OK
 . exists 
 tags  OK 
@@ -1087,22 +1093,22 @@ Retrieve all the tags END
 Retrieve tag details for an existing tag START :
 ================================================ 
 Step #0
-Request GET http://debauve.qatest.dataiku.com:80/tags/2
+Request GET http://debauve.qatest.dataiku.com:80/tags/3
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
 request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:50 GMT', 'Content-Type': 'application/json', 'Content-Length': '65', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:11:59 GMT', 'Content-Type': 'application/json', 'Content-Length': '72', 'Connection': 'keep-alive'}
 {
-    "tag": "tag118", 
+    "tag": "upTag0", 
     "tasks": [
-        "task_37"
+        "task_8updateOK"
     ]
 }
 
-0:00:00.015078
+0:00:00.020702
 HTML Status code OK
 $.tag exists 
 $.tag OK 
@@ -1111,22 +1117,42 @@ Response time OK
 Retrieve tag details for an existing tag END 
 ================================================ 
 
+Retrieve tag details for an unexisting tag START :
+================================================ 
+Step #0
+Request GET http://debauve.qatest.dataiku.com:80/tags/29
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
+request body:
+None
+Response:
+404
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:12:00 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
+{}
+
+0:00:00.012077
+HTML Status code OK
+Response time OK
+
+Retrieve tag details for an unexisting tag END 
+================================================ 
+
 Delete task while authentified as NOT the owner START :
 ================================================ 
 Step #0
 setCredentials
 Step #1
-Request DELETE http://debauve.qatest.dataiku.com:80/5
+Request DELETE http://debauve.qatest.dataiku.com:80/6
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic UUE6d2lsbFdpbg=='}
 request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:50 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:12:01 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
 {}
 
-0:00:00.016475
+0:00:00.017186
 status code NOK: got 200 instead of expected 401
 Delete task while authentified as NOT the owner END 
 ================================================ 
@@ -1143,10 +1169,10 @@ request body:
 None
 Response:
 200
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:51 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:12:02 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
 {}
 
-0:00:00.017783
+0:00:00.015808
 HTML Status code OK
 Response time OK
 
@@ -1158,17 +1184,17 @@ Delete task while authentified as the owner END
 Retrieve Task information for unexisting task START :
 ================================================ 
 Step #0
-Request GET http://debauve.qatest.dataiku.com:80/30
+Request GET http://debauve.qatest.dataiku.com:80/69
 request headers:
 {'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
 request body:
 None
 Response:
 404
-{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 04:05:53 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 11:12:04 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'keep-alive'}
 {}
 
-0:00:00.515700
+0:00:00.513347
 HTML Status code OK
 Response time OK
 

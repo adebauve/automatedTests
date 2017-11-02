@@ -179,8 +179,8 @@ class TestCase:
                   # actual_value is a list of 1 dictionary, to transform into list of tagnames:
                   for k,v in actual_value[0].items():
                      tmplist.append(k)
-                  tmplist.sort()
                   actual_value = tmplist
+                  actual_value.sort()
                   expected_value.sort()
                   if actual_value == expected_value:
                      testResultString = testResultString + 'tags  OK \n'

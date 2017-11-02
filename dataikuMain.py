@@ -57,6 +57,7 @@ logfilename = logdir + '/logfile' + currentTime + '.txt'
 reportFilename = logdir + '/testReport' + currentTime + '.csv'
       
 fromFile = True
+
 if not fromFile:
    users = []
    mainUser = "QA"
@@ -284,7 +285,7 @@ expected_result = expected_authenticate(mainUser)
 tc.addStep('authenticate',expected=expected_result)
 expected_result = expected_newTask(mainUser,taskName,tags)
 tc.addStep('createTask',args=[taskName,tags],expected=expected_result)
-expected_result = expected_listTasks([],taskName,tags)
+expected_result = expected_listTasks(taskList,taskName,tags)
 # first task to be created => taskList = []
 tc.addStep('listTasks', expected=expected_result)
 test_result = tc.executeTest()
@@ -300,6 +301,40 @@ testNumber+=1
 if test_result:
    lightTaskList.append(taskName)
    taskList = getTaskList(tc)
+   
+time.sleep(sleepDelay)
+
+tc = TestCase("Create new task with title > 20 while authentified", "NOK")
+randRange = 100
+randomIndex = random.randrange(0,randRange)
+taskName = 'anticonstitutionnellement' + str(randomIndex)
+while taskName in lightTaskList:
+   randomIndex = random.randrange(randRange,randRange + 100)
+   taskName = 'task_' + str(randomIndex)
+   randRange+= 100
+tags = []
+tc.addStep('setCredentials',args=[mainUser,password])
+expected_result = expected_authenticate(mainUser)
+tc.addStep('authenticate',expected=expected_result)
+expected_result = expected_newTask(mainUser,taskName,tags, False)
+tc.addStep('createTask',args=[taskName,tags],expected=expected_result)
+expected_result = expected_listTasks(taskList,taskName,tags)
+# first task to be created => taskList = []
+tc.addStep('listTasks', expected=expected_result)
+test_result = tc.executeTest()
+logResults(tc, testNumber, test_result, logfilename)
+results = results2Array(tc, testNumber, test_result, results)
+if test_result:
+   lightTaskList.append(taskName)
+   taskList = getTaskList(tc)
+else:
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
+testNumber+=1
+
    
 time.sleep(sleepDelay)
 
@@ -322,7 +357,6 @@ for x in range(randNumber):
       tag = 'tag' + str(randomIndex)
       randRange+= 100
    tags.append(tag)
-   lightTagList.append(tag)
 tc.addStep('setCredentials',args=[mainUser,password])
 expected_result = expected_authenticate(mainUser)
 tc.addStep('authenticate',expected=expected_result)
@@ -369,7 +403,6 @@ for x in range(randNumber):
       tag = 'tag' + str(randomIndex)
       randRange+= 100
    tags.append(tag)
-   lightTagList.append(tag)
 tc.addStep('setCredentials',args=[mainUser,password])
 expected_result = expected_authenticate(mainUser)
 tc.addStep('authenticate',expected=expected_result)
@@ -396,7 +429,7 @@ if test_result:
 
 time.sleep(sleepDelay)
 
-tc = TestCase("Create new task with existing tags while authentified with another user", "OK")
+tc = TestCase("Create new task with tags > 20 char, while authentified", "NOK")
 # generate random taskname:
 randRange = 100
 randomIndex = random.randrange(0,randRange)
@@ -405,7 +438,54 @@ while taskName in lightTaskList:
    randomIndex = random.randrange(randRange,randRange + 100)
    taskName = 'task_' + str(randomIndex)
    randRange+= 100
-# tags are the same as previous testcase
+# generate 1 tagname:
+tags = []
+tag = 'tagAnticonstitutionnellement' + str(randomIndex)
+while tag in lightTagList:
+   randomIndex = random.randrange(randRange, randRange + 100)
+   tag = 'tag' + str(randomIndex)
+   randRange+= 100
+tags.append(tag)
+tc.addStep('setCredentials',args=[mainUser,password])
+expected_result = expected_authenticate(mainUser)
+tc.addStep('authenticate',expected=expected_result)
+expected_result = expected_newTask(mainUser,taskName,tags, False)
+tc.addStep('createTask',args=[taskName,tags],expected=expected_result)
+expected_result = expected_listTasks(taskList,taskName,tags)
+tc.addStep('listTasks',expected=expected_result)
+test_result = tc.executeTest()
+logResults(tc, testNumber, test_result, logfilename)
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
+# must retrieve updated taskList:
+tc = TestCase("list tasks for testing purpose","OK")
+tc.addStep('listTasks')
+tc.executeTest()
+taskList = getTaskList(tc)
+# retrieve taglist:
+tc = TestCase("list tags for testing purpose","OK")
+tc.addStep('listTags')
+tc.executeTest()
+tagDict = getTagDict(tc)
+lightTagList = []
+for k,v in tagDict.items():
+   lightTagList.append(k)
+
+time.sleep(sleepDelay)
+
+tc = TestCase("Create new task with existing tag while authentified with another user", "OK")
+# generate random taskname:
+randRange = 100
+randomIndex = random.randrange(0,randRange)
+taskName = 'task_' + str(randomIndex)
+while taskName in lightTaskList:
+   randomIndex = random.randrange(randRange,randRange + 100)
+   taskName = 'task_' + str(randomIndex)
+   randRange+= 100
+# tags:
+randomIndex = random.randrange(len(lightTagList))
+tags = []
+tags.append(lightTagList[randomIndex])
 tc.addStep('setCredentials',args=[otherUser,otherPassword])
 expected_result = expected_authenticate(otherUser)
 tc.addStep('authenticate',expected=expected_result)
@@ -430,7 +510,7 @@ else:
 time.sleep(sleepDelay)
 
 # do it twice:
-tc = TestCase("2nd Create new task with existing tags while authentified with another user", "OK")
+tc = TestCase("2nd Create new task with existing tag while authentified with another user", "OK")
 # generate random taskname:
 randRange = 100
 randomIndex = random.randrange(0,randRange)
@@ -439,7 +519,10 @@ while taskName in lightTaskList:
    randomIndex = random.randrange(randRange,randRange + 100)
    taskName = 'task_' + str(randomIndex)
    randRange+= 100
-# tags are the same as previous testcase
+# tags:
+randomIndex = random.randrange(len(lightTagList))
+tags = []
+tags.append(lightTagList[randomIndex])
 tc.addStep('setCredentials',args=[otherUser,otherPassword])
 expected_result = expected_authenticate(otherUser)
 tc.addStep('authenticate',expected=expected_result)
@@ -472,6 +555,7 @@ tc.addStep('authenticate',expected=expected_result)
 expected_result = expected_newTask(mainUser,taskName,tags,False)
 tc.addStep('createTask',args=[taskName,tags],expected=expected_result)
 expected_result = expected_listTasks()
+test_result = tc.executeTest()
 logResults(tc, testNumber, test_result, logfilename)
 results = results2Array(tc, testNumber, test_result, results)
 testNumber+=1
@@ -490,7 +574,10 @@ if type(taskList) is dict:
    select_id = jsonpath.jsonpath(taskList,"$.id")[0]
 else:
    id_list = jsonpath.jsonpath(taskList,"$[*].id")
-   select_id = id_list[random.randrange(0,len(id_list))]
+   if id_list:
+      select_id = id_list[random.randrange(0,len(id_list))]
+   else:
+      raise NameError("cannot find task")
 expected_result = expected_taskInfo(select_id)
 tc.addStep('getTaskInfo', args=[select_id], expected=expected_result)
 test_result = tc.executeTest()
@@ -520,6 +607,13 @@ if not test_result:
    tc.addStep('listTasks')
    tc.executeTest()
    taskList = getTaskList(tc)
+   tc = TestCase("list tags for testing purpose")
+   tc.addStep('listTags')
+   tc.executeTest()
+   tagDict = getTagDict(tc)
+   lightTagList = []
+   for k,v in tagDict.items():
+      lightTagList.append(k)
 
 time.sleep(sleepDelay)
 
@@ -528,7 +622,11 @@ tc = TestCase("Update valid Task while authenticated as the owner - change statu
 if type(taskList) is dict:
    select_task = taskList
 else:
-    select_task = jsonpath.jsonpath(taskList, '$[?(@.username=="'+mainUser+'")]')[0]
+   tl = jsonpath.jsonpath(taskList, '$[?(@.username=="'+mainUser+'")]')
+   if tl:
+      select_task = tl[0]
+   else:
+      raise NameError("no task found for " + mainUser)
 select_id = select_task["id"]
 select_taskName = select_task["title"]
 newTaskName = select_taskName + 'updateOK'
@@ -560,9 +658,20 @@ if test_result:
       if t == select_taskName:
          t = newTaskName
          break
-   lightTagList.append(newTag)
-   # clean the lightTagList from duplicates
-   lightTagList = list(set(lightTagList))
+else:
+   # must retrieve updated taskList:
+   tc = TestCase("list tasks for testing purpose","OK")
+   tc.addStep('listTasks')
+   tc.executeTest()
+   taskList = getTaskList(tc)
+# retrieve taglist:
+tc = TestCase("list tags for testing purpose", "OK")
+tc.addStep('listTags')
+tc.executeTest()
+tagDict = getTagDict(tc)
+lightTagList = []
+for k,v in tagDict.items():
+   lightTagList.append(k)
 
 time.sleep(sleepDelay)
 
@@ -571,7 +680,11 @@ tc = TestCase("Update valid Task while authenticated as NOT the owner - change s
 if type(taskList) is dict:
    select_task = taskList
 else:
-   select_task = jsonpath.jsonpath(taskList, '$[?(@.username=="'+otherUser+'")]')[0]
+   tl = jsonpath.jsonpath(taskList, '$[?(@.username=="'+otherUser+'")]')
+   if tl:
+      select_task = tl[0]
+   else:
+      raise NameError("no task found for " + otherUser)
 select_id = select_task["id"]
 # login as mainUser
 tc.addStep('setCredentials',args=[mainUser,password])
@@ -610,11 +723,18 @@ results = results2Array(tc, testNumber, test_result, results)
 testNumber+=1
 if test_result:
    tagDict = getTagDict(tc)
-   lightTagList = []
-   for k,v in tagDict.items():
-      lightTagList.append(k)
+else:
+   # must retrieve clean tag list:
+   tc = TestCase("list tags for testing purpose","OK")
+   tc.addStep('listTags')
+   tc.executeTest()
+   tagDict = getTagDict(tc)
+lightTagList = []
+for k,v in tagDict.items():
+   lightTagList.append(k)
       
-# response = tr.getTagInfo(2)
+time.sleep(sleepDelay)
+
 tc = TestCase("Retrieve tag details for an existing tag", "OK")
 randomIndex = random.randrange(len(lightTagList))
 select_tag = lightTagList[randomIndex]
@@ -624,6 +744,7 @@ tag_id = tag_list_info[len(tag_list_info) - 1]
 expected_result = init_expected_result()
 expected_result['status'] = 200
 expected_result['content'] = [["$.tag", select_tag, "equal"]]
+expected_result['responseTime'] = maxResponseTime
 # could be nice: check cross references between tasks and tags
 tc.addStep("getTagInfo", args=[tag_id], expected=expected_result)
 test_result = tc.executeTest()
@@ -631,11 +752,41 @@ logResults(tc, testNumber, test_result, logfilename)
 results = results2Array(tc, testNumber, test_result, results)
 testNumber+=1
 
+time.sleep(sleepDelay)
+
+tc = TestCase("Retrieve tag details for an unexisting tag", "NOK")
+randRange = 100
+randomIndex = random.randrange(randRange)
+for k, v in tagDict.items():
+   tag_list_info = v.split('/')
+   tag_id = tag_list_info[len(tag_list_info) - 1]
+   if randomIndex == tag_id:
+      randomIndex = random.randRange(randRange,randRange+100)
+      randRange+= 100
+   else:
+      break
+expected_result = init_expected_result()
+expected_result['status'] = 404
+expected_result['content'] = []
+expected_result['responseTime'] = maxResponseTime
+# could be nice: check cross references between tasks and tags
+tc.addStep("getTagInfo", args=[randomIndex], expected=expected_result)
+test_result = tc.executeTest()
+logResults(tc, testNumber, test_result, logfilename)
+results = results2Array(tc, testNumber, test_result, results)
+testNumber+=1
+
+time.sleep(sleepDelay)
+
 tc = TestCase("Delete task while authentified as NOT the owner", "NOK")
 if type(taskList) is dict:
    select_task = taskList
 else:
-   select_task = jsonpath.jsonpath(taskList, '$[?(@.username=="'+otherUser+'")]')[0]
+   tl = jsonpath.jsonpath(taskList, '$[?(@.username=="'+otherUser+'")]')
+   if tl:
+      select_task = tl[0]
+   else:
+      raise NameError("no task found for " + otherUser)
 select_id = select_task["id"]
 expected_result = init_expected_result()
 expected_result['status'] = 401
@@ -661,7 +812,11 @@ tc = TestCase("Delete task while authentified as the owner", "OK")
 if type(taskList) is dict:
    select_task = taskList
 else:
-   select_task = jsonpath.jsonpath(taskList, '$[?(@.username=="'+mainUser+'")]')[0]
+   tl = jsonpath.jsonpath(taskList, '$[?(@.username=="'+mainUser+'")]')
+   if tl:
+      select_task = tl[0]
+   else:
+      raise NameError("no task found for " + mainUser)
 select_id = select_task["id"]
 expected_result = init_expected_result()
 expected_result['status'] = 200

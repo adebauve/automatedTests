@@ -91,7 +91,6 @@ class TestRequest:
    def getTaskInfo(self,taskid):
       self.url = self.endpoint + str(taskid)
       req = Request('GET', self.url, auth=self.authentication)
-      
       prep_req = self.session.prepare_request(req)
       resp = self.callAndLog(prep_req)
       return resp
