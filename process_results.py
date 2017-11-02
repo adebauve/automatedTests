@@ -1,27 +1,33 @@
 def printResults(results):
+   outstring = ''
    for r_i, r_val in results.items():
-      print("Step #" + str(r_val['step']))
-      print(r_val['request'])
+      outstring+= 'Step #' + str(r_val['step']) + '\n'
+      outstring+= r_val['request'] + '\n'
       if r_val['responseStatus'] > 1 :
-         print('Response:')
-         print(r_val['responseStatus'])
-         print(r_val['responseHeaders'])
-         print(r_val['responseBody'])
-         print(r_val['responseTime'])
-         print(r_val['testResult'])
+         outstring+= 'Response:\n'
+         outstring+= str(r_val['responseStatus']) + '\n'
+         outstring+= str(r_val['responseHeaders']) + '\n'
+         outstring+= r_val['responseBody'] + '\n'
+         outstring+= str(r_val['responseTime']) + '\n'
+         outstring+= r_val['testResult'] + '\n'
+   return outstring
 # todo: process results better than this and generate report
 
 def csvHeader():
-   return [["Index", "Title", "Type", "Request", "Response Status", "Response Time", "Result"]]
+   return [["Index", "Title", "Result", "Request", "Response Status", "Response Time", "Type"]]
    
 def results2Array(tcase, index, globalResult, out=[]):
    title = tcase.title
+   if tcase.type == "OK":
+      type = "passing"
+   else:
+      type = "failing"
    type = tcase.type
    if globalResult:
       ok = 'OK'
    else:
       ok = 'NOK'
-   line = [index, title, type, '', '', '', ok]
+   line = [index, title, ok, '', '', '', type]
    out.append(line)
 
    for i, result in tcase.results.items():
@@ -41,7 +47,7 @@ def results2Array(tcase, index, globalResult, out=[]):
          testResult = 'NOK'
       else:
          testResult = 'OK'
-      out.append([stepIndex, title,'', request, respStatus, respTime, testResult])
+      out.append([stepIndex, title,testResult, request, respStatus, respTime, ''])
    return out
 
 def logResults(tcase, index, globalResult, filename):
@@ -49,6 +55,8 @@ def logResults(tcase, index, globalResult, filename):
    # self.results[s_i] = {"step":s_i, "request": self.request.request_trace, \
          # "responseStatus": self.request.response_status, "responseHeaders": self.request.response_headers, "responseBody":self.request.response_body, "responseTime":self.request.response_time}
    #self.results[stepIndex]['testResult'] = testResultString + "status code NOK: got " + str(resp_status) + " instead of expected " + str(exp_status)
-   f = open(filename, 'w')
-   
+   f = open(filename, 'a')
+   f.write(tcase.title + " START :\n================================================ \n")
+   f.write(printResults(tcase.results))
+   f.write(tcase.title + " END \n================================================ \n\n")
    f.close()

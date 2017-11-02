@@ -41,6 +41,8 @@ class TestCase:
       
    def executeTest(self):
       result = False
+      print("Execution of " + self.title)
+      print("=============================================")
       for s_i,s_val in self.steps.items():
          to_execute = getattr(self.request, s_val['method'])
          if len(s_val['args']) > 0:
@@ -52,7 +54,9 @@ class TestCase:
          result = self.checkResults(s_i)
          # exit the loop if something is wrong:
          if not result:
+            print("+++NOK+++NOK+++NOK+++NOK+++NOK+++NOK+++NOK+++")
             return result
+      print("===================================================================")
       return result
             
    
@@ -130,14 +134,14 @@ class TestCase:
                   self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
                   return False
                else:
-                  actual_value = actual_value.sort()
-                  expected_value = expected_value.sort()
+                  actual_value.sort()
+                  expected_value.sort()
                   if actual_value == expected_value:
                      testResultString = testResultString + path + ' OK \n'
                   else:
                      self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
                      return False
-            elif method == "dictListEqual":
+            elif method == "taskDictListEqual":
                actual_value = sorted(actual_value, key=lambda task: task['id'])
                expected_value = sorted(expected_value, key=lambda task: task['id'])
                if len(actual_value) == len(expected_value):
@@ -156,6 +160,23 @@ class TestCase:
                else:
                   self.results[stepIndex]['testResult'] = testResultString + path + ' NOK in response: ' + str(actual_value) + '\n'
                   return False
+            elif method == "tagDictEqual":
+               if (len(actual_value) == 0) & (len(expected_value) == 0):
+                  testResultString = testResultString + 'no tags:  OK \n'
+               else:
+                  tmplist = []
+                  # expected_value is a list of tagnames
+                  # actual_value is a list of 1 dictionary, to transform into list of tagnames:
+                  for k,v in actual_value[0].items():
+                     tmplist.append(k)
+                  tmplist.sort()
+                  actual_value = tmplist
+                  expected_value.sort()
+                  if actual_value == expected_value:
+                     testResultString = testResultString + 'tags  OK \n'
+                  else:
+                     self.results[stepIndex]['testResult'] = testResultString + 'tags NOK in response: ' + str(actual_value) + '\n'
+                     return False
             elif method == "checkToken":
                # print("check token " + actual_value[0])
                if self.checkToken(actual_value[0]):
@@ -196,8 +217,7 @@ class TestCase:
                
       if expected['responseTime'] > 0:
          if self.request.response_time.total_seconds() > expected['responseTime'] :
-            self.results[stepIndex]['testResult'] = testResultString + 'Response time NOK: ' + str(self.request.response_time.total_seconds()) + '\n'
-            return False
+            testResultString = testResultString + 'Response time NOK: ' + str(self.request.response_time.total_seconds()) + '\n'
          else:
             testResultString = testResultString + 'Response time OK\n'
             

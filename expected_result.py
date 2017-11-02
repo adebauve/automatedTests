@@ -15,7 +15,7 @@ def expected_listTasks(knownTaskList=[], newTask=None, tags=[]):
          content = [["$[*].date",'',"exists"], ["$[*].done",'',"exists"], ["$[*].id",'',"exists"], ["$[*].title",newTask,"checkInList"]]
    elif len(knownTaskList) > 0:
       # check if the response contains the exact same content than the knownTaskList in parameter
-      content = [["$[*]",knownTaskList,"dictListEqual"]]
+      content = [["$[*]",knownTaskList,"taskDictListEqual"]]
    
    return {'status':200, 'content':content, 'responseTime':1.0}
 
@@ -47,7 +47,8 @@ def expected_taskInfo(task,OK=True):
             elif t_i == "title":
                content.append(["$.title", t_val, "equal"])
             else:
-               print(t_i + " not supported by the test")
+               # print(t_i + " not supported by the test")
+               pass
          
          content.append(["$.id", task[0], "equal"])
          content.append(["$.tags", '', "exists"])
@@ -67,7 +68,8 @@ def expected_taskUpdate(task,OK=True):
          elif t_i == "title":
             content.append(["$.title", t_val, "equal"])
          else:
-            print(t_i + " not supported as update in Test")
+            # print(t_i + " not supported as update in Test")
+            pass
       
       content.append(["$.id", task[0], "equal"])
       content.append(["$.tags", '', "exists"])

@@ -134,7 +134,6 @@ class TestRequest:
    def getTagInfo(self,tagid):
       self.url = self.endpoint + 'tags/' + str(tagid)
       req = Request('GET', self.url)
-      
       prep_req = self.session.prepare_request(req)
       resp = self.callAndLog(prep_req)
    

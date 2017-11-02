@@ -1,0 +1,28 @@
+Retrieve all the tags START :
+================================================ 
+Step #0
+Request GET http://debauve.qatest.dataiku.com:80/tags
+request headers:
+{'User-Agent': 'python-requests/2.18.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}
+request body:
+None
+Response:
+200
+{'Server': 'nginx/1.10.2', 'Date': 'Thu, 02 Nov 2017 00:44:49 GMT', 'Content-Type': 'application/json', 'Content-Length': '376', 'Connection': 'keep-alive'}
+{
+    "tag121": "http://localhost:5000/tags/2", 
+    "tag192": "http://localhost:5000/tags/5", 
+    "tag234": "http://localhost:5000/tags/3", 
+    "tag27": "http://localhost:5000/tags/4", 
+    "tag279": "http://localhost:5000/tags/6", 
+    "tag357": "http://localhost:5000/tags/7", 
+    "tag5": "http://localhost:5000/tags/1", 
+    "upTag55": "http://localhost:5000/tags/8"
+}
+
+0:00:00.029365
+Response time OK
+
+Retrieve all the tags END 
+================================================ 
+
